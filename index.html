@@ -13,14 +13,14 @@
       background: radial-gradient(circle at top left, #e3f2fd, #fce4ec);
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
     }
 
     .container {
       width: 90%;
       max-width: 400px;
-      margin-top: 2rem;
       background: rgba(255, 255, 255, 0.6);
       border-radius: 20px;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -106,6 +106,14 @@
     button:active {
       transform: scale(0.97);
     }
+
+    .footer {
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      color: rgba(0, 0, 0, 0.5);
+      text-align: center;
+      user-select: none;
+    }
   </style>
 </head>
 <body>
@@ -136,6 +144,10 @@
       <button id="reset">🧹 Очистити все</button>
       <button id="share">📤 Поділитись у Telegram</button>
     </div>
+  </div>
+
+  <div class="footer">
+    © 2025 Підготував Андрій
   </div>
 
   <script>
