@@ -4,93 +4,102 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Розрахунок ЗП</title>
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f4bc.svg" type="image/svg+xml">
   <style>
     body {
+      font-family: "Inter", Arial, sans-serif;
       margin: 0;
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, #9face6, #74ebd5);
+      padding: 1rem;
+      background: radial-gradient(circle at top left, #a8edea, #fed6e3);
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: center;
-      padding: 1rem;
+      align-items: flex-start;
     }
 
     .container {
-      backdrop-filter: blur(20px);
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      width: 90%;
+      max-width: 400px;
+      margin-top: 2rem;
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.3);
-      padding: 2rem;
-      width: 100%;
-      max-width: 420px;
-      color: #fff;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 1.5rem;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h1 {
+      font-size: 1.1rem;
       text-align: center;
-      font-weight: 600;
-      font-size: 1.1rem; /* меньше, чтобы не переносился */
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
+      color: #fff;
+      letter-spacing: 0.5px;
     }
 
     label {
       display: block;
-      margin: 0.5rem 0 0.2rem;
-      font-weight: 500;
-      font-size: 0.95rem;
+      margin: 0.6rem 0 0.3rem;
+      color: #fff;
+      font-size: 0.9rem;
     }
 
     input {
       width: 100%;
-      padding: 0.6rem;
-      border: none;
+      padding: 0.5rem;
+      margin-bottom: 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 10px;
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.15);
       color: #fff;
-      outline: none;
-      transition: 0.2s;
+      font-size: 1rem;
+      text-align: center;
+      transition: box-shadow 0.3s ease, transform 0.2s ease, background 0.3s ease;
     }
 
     input:focus {
-      background: rgba(255, 255, 255, 0.3);
-    }
-
-    ::placeholder {
-      color: #eee;
+      outline: none;
+      box-shadow: 0 0 12px rgba(173, 216, 230, 0.9);
+      transform: scale(1.03);
+      background: rgba(255, 255, 255, 0.25);
     }
 
     .result {
       text-align: center;
-      font-weight: bold;
-      font-size: 1.3rem;
       margin-top: 1rem;
+      font-weight: bold;
+      font-size: 1.2rem;
       color: #fff;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
     }
 
     button {
       width: 100%;
       padding: 0.7rem;
-      margin-top: 1rem;
-      border: none;
-      border-radius: 10px;
       font-size: 1rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .reset-btn {
-      background: rgba(255, 255, 255, 0.3);
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(90deg, #74ebd5, #9face6);
       color: #fff;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      margin-top: 0.5rem;
     }
 
-    .reset-btn:hover {
-      background: rgba(255, 255, 255, 0.4);
+    button:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 10px rgba(148, 187, 233, 0.6);
+    }
+
+    button:active {
+      transform: scale(0.97);
     }
   </style>
 </head>
@@ -98,34 +107,30 @@
   <div class="container">
     <h1>💼 Розрахунок зарплати</h1>
 
-    <label>📦 Збирання в ДС (1,34 грн):</label>
-    <input type="number" id="ds" placeholder="0" />
+    <label>📦 Збирання в ДС (1,34 грн × кількість):</label>
+    <input type="number" id="ds" value="">
 
-    <label>🏷️ Збирання в ТЗ (2,69 грн):</label>
-    <input type="number" id="tz" placeholder="0" />
+    <label>🚚 Збирання в ТЗ (2,69 грн × кількість):</label>
+    <input type="number" id="tz" value="">
 
-    <label>🔄 Переміщення товарів з ТЗ (3,32 грн):</label>
-    <input type="number" id="move" placeholder="0" />
+    <label>🔁 Переміщення товарів з ТЗ (3,32 грн × кількість):</label>
+    <input type="number" id="move" value="">
 
-    <label>🧺 Розміщення товарів у ДС (1,53 грн):</label>
-    <input type="number" id="place" placeholder="0" />
+    <label>📥 Розміщення товарів у ДС (1,53 грн × кількість):</label>
+    <input type="number" id="place" value="">
 
-    <label>⚖️ Вага розміщення (0,14 грн):</label>
-    <input type="number" id="weight" placeholder="0" />
+    <label>⚖️ Вага розміщення (0,14 грн × кг):</label>
+    <input type="number" id="weight" value="">
 
-    <label>🎁 Пакування замовлення (0,27 грн):</label>
-    <input type="number" id="pack" placeholder="0" />
+    <label>🎁 Пакування замовлення (0,27 грн × артикулів):</label>
+    <input type="number" id="pack" value="">
 
     <div class="result" id="total">Всього: 0 грн</div>
 
-    <button class="reset-btn" id="reset">Очистити все</button>
+    <button id="reset">Очистити все</button>
   </div>
 
   <script>
-    const inputs = document.querySelectorAll('input');
-    const total = document.getElementById('total');
-    const resetBtn = document.getElementById('reset');
-
     const rates = {
       ds: 1.34,
       tz: 2.69,
@@ -135,26 +140,36 @@
       pack: 0.27
     };
 
-    function recalc() {
-      const sum =
-        (rates.ds * +document.getElementById('ds').value) +
-        (rates.tz * +document.getElementById('tz').value) +
-        (rates.move * +document.getElementById('move').value) +
-        (rates.place * +document.getElementById('place').value) +
-        (rates.weight * +document.getElementById('weight').value) +
-        (rates.pack * +document.getElementById('pack').value);
+    const inputs = document.querySelectorAll('input');
+    const total = document.getElementById('total');
+    const reset = document.getElementById('reset');
+
+    // Вычисление суммы
+    function updateTotal() {
+      let sum =
+        (rates.ds * Number(document.getElementById('ds').value || 0)) +
+        (rates.tz * Number(document.getElementById('tz').value || 0)) +
+        (rates.move * Number(document.getElementById('move').value || 0)) +
+        (rates.place * Number(document.getElementById('place').value || 0)) +
+        (rates.weight * Number(document.getElementById('weight').value || 0)) +
+        (rates.pack * Number(document.getElementById('pack').value || 0));
 
       total.textContent = `Всього: ${sum.toFixed(2)} грн`;
+      total.style.transform = "scale(1.1)";
+      setTimeout(() => total.style.transform = "scale(1)", 150);
     }
 
-    inputs.forEach(inp => {
-      inp.addEventListener('focus', e => e.target.select());
-      inp.addEventListener('input', recalc);
+    inputs.forEach(input => {
+      input.addEventListener('input', updateTotal);
+      // при фокусе очищаем placeholder 0
+      input.addEventListener('focus', () => {
+        if (input.value === "0") input.value = "";
+      });
     });
 
-    resetBtn.addEventListener('click', () => {
-      inputs.forEach(inp => (inp.value = ""));
-      total.textContent = 'Всього: 0 грн';
+    reset.addEventListener('click', () => {
+      inputs.forEach(i => i.value = "");
+      updateTotal();
     });
   </script>
 </body>
