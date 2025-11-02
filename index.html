@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Розрахунок ЗП</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #9face6, #74ebd5);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .container {
+      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.3);
+      padding: 2rem;
+      width: 100%;
+      max-width: 420px;
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.1rem; /* меньше, чтобы не переносился */
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin: 0.5rem 0 0.2rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.6rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    input:focus {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    ::placeholder {
+      color: #eee;
+    }
+
+    .result {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.3rem;
+      margin-top: 1rem;
+      color: #fff;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.7rem;
+      margin-top: 1rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .reset-btn {
+      background: rgba(255, 255, 255, 0.3);
+      color: #fff;
+    }
+
+    .reset-btn:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>💼 Розрахунок зарплати</h1>
+
+    <label>📦 Збирання в ДС (1,34 грн × кількість):</label>
+    <input type="number" id="ds" placeholder="0" />
+
+    <label>🏷️ Збирання в ТЗ (2,69 грн × кількість):</label>
+    <input type="number" id="tz" placeholder="0" />
+
+    <label>🔄 Переміщення товарів з ТЗ (3,32 грн × кількість):</label>
+    <input type="number" id="move" placeholder="0" />
+
+    <label>🧺 Розміщення товарів у ДС (1,53 грн × кількість):</label>
+    <input type="number" id="place" placeholder="0" />
+
+    <label>⚖️ Вага розміщення (0,14 грн × кг):</label>
+    <input type="number" id="weight" placeholder="0" />
+
+    <label>🎁 Пакування замовлення (0,27 грн × артикулів):</label>
+    <input type="number" id="pack" placeholder="0" />
+
+    <div class="result" id="total">Всього: 0 грн</div>
+
+    <button class="reset-btn" id="reset">Очистити все</button>
+  </div>
+
+  <script>
+    const inputs = document.querySelectorAll('input');
+    const total = document.getElementById('total');
+    const resetBtn = document.getElementById('reset');
+
+    const rates = {
+      ds: 1.34,
+      tz: 2.69,
+      move: 3.32,
+      place: 1.53,
+      weight: 0.14,
+      pack: 0.27
+    };
+
+    function recalc() {
+      const sum =
+        (rates.ds * +document.getElementById('ds').value) +
+        (rates.tz * +document.getElementById('tz').value) +
+        (rates.move * +document.getElementById('move').value) +
+        (rates.place * +document.getElementById('place').value) +
+        (rates.weight * +document.getElementById('weight').value) +
+        (rates.pack * +document.getElementById('pack').value);
+
+      total.textContent = `Всього: ${sum.toFixed(2)} грн`;
+    }
+
+    inputs.forEach(inp => {
+      inp.addEventListener('focus', e => e.target.select());
+      inp.addEventListener('input', recalc);
+    });
+
+    resetBtn.addEventListener('click', () => {
+      inputs.forEach(inp => (inp.value = ""));
+      total.textContent = 'Всього: 0 грн';
+    });
+  </script>
+</body>
+</html>
