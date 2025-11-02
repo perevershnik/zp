@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Розрахунок ЗП</title>
-  <link rel="icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f4bc.svg" type="image/svg+xml">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f4b0.svg" type="image/svg+xml">
   <style>
     body {
       font-family: "Inter", Arial, sans-serif;
@@ -79,6 +79,13 @@
       transition: all 0.3s ease;
     }
 
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+    }
+
     button {
       width: 100%;
       padding: 0.7rem;
@@ -89,7 +96,6 @@
       color: #fff;
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.3s ease;
-      margin-top: 0.5rem;
     }
 
     button:hover {
@@ -126,7 +132,10 @@
 
     <div class="result" id="total">Всього: 0 грн</div>
 
-    <button id="reset">Очистити все</button>
+    <div class="buttons">
+      <button id="reset">🧹 Очистити все</button>
+      <button id="share">📤 Поділитись у Telegram</button>
+    </div>
   </div>
 
   <script>
@@ -142,9 +151,11 @@
     const inputs = document.querySelectorAll('input');
     const total = document.getElementById('total');
     const reset = document.getElementById('reset');
+    const share = document.getElementById('share');
+    let sum = 0;
 
     function updateTotal() {
-      let sum =
+      sum =
         (rates.ds * Number(document.getElementById('ds').value || 0)) +
         (rates.tz * Number(document.getElementById('tz').value || 0)) +
         (rates.move * Number(document.getElementById('move').value || 0)) +
@@ -167,6 +178,11 @@
     reset.addEventListener('click', () => {
       inputs.forEach(i => i.value = "");
       updateTotal();
+    });
+
+    share.addEventListener('click', () => {
+      const text = encodeURIComponent(`💼 Мій заробіток сьогодні: ${sum.toFixed(2)} грн 💰\nПеревір свій тут: https://perevershnik.github.io/zp/`);
+      window.open(`https://t.me/share/url?url=${text}`, '_blank');
     });
   </script>
 </body>
