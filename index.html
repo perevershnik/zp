@@ -10,7 +10,7 @@
       font-family: "Inter", Arial, sans-serif;
       margin: 0;
       padding: 1rem;
-      background: radial-gradient(circle at top left, #a8edea, #fed6e3);
+      background: radial-gradient(circle at top left, #e3f2fd, #fce4ec);
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -21,11 +21,11 @@
       width: 90%;
       max-width: 400px;
       margin-top: 2rem;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.6);
       border-radius: 20px;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       padding: 1.5rem;
       animation: fadeIn 1s ease;
     }
@@ -39,35 +39,35 @@
       font-size: 1.1rem;
       text-align: center;
       margin-bottom: 1rem;
-      color: #fff;
+      color: #333;
       letter-spacing: 0.5px;
     }
 
     label {
       display: block;
       margin: 0.6rem 0 0.3rem;
-      color: #fff;
+      color: #333;
       font-size: 0.9rem;
+      font-weight: 500;
     }
 
     input {
       width: 100%;
       padding: 0.5rem;
       margin-bottom: 0.8rem;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(0, 0, 0, 0.2);
       border-radius: 10px;
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
+      background: rgba(255, 255, 255, 0.9);
+      color: #222;
       font-size: 1rem;
       text-align: center;
-      transition: box-shadow 0.3s ease, transform 0.2s ease, background 0.3s ease;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
     }
 
     input:focus {
       outline: none;
-      box-shadow: 0 0 12px rgba(173, 216, 230, 0.9);
-      transform: scale(1.03);
-      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 10px rgba(100, 181, 246, 0.8);
+      transform: scale(1.02);
     }
 
     .result {
@@ -75,8 +75,7 @@
       margin-top: 1rem;
       font-weight: bold;
       font-size: 1.2rem;
-      color: #fff;
-      letter-spacing: 0.5px;
+      color: #222;
       transition: all 0.3s ease;
     }
 
@@ -86,7 +85,7 @@
       font-size: 1rem;
       border: none;
       border-radius: 12px;
-      background: linear-gradient(90deg, #74ebd5, #9face6);
+      background: linear-gradient(90deg, #64b5f6, #ba68c8);
       color: #fff;
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.3s ease;
@@ -95,7 +94,7 @@
 
     button:hover {
       transform: scale(1.03);
-      box-shadow: 0 0 10px rgba(148, 187, 233, 0.6);
+      box-shadow: 0 0 10px rgba(100, 181, 246, 0.5);
     }
 
     button:active {
@@ -144,7 +143,6 @@
     const total = document.getElementById('total');
     const reset = document.getElementById('reset');
 
-    // Вычисление суммы
     function updateTotal() {
       let sum =
         (rates.ds * Number(document.getElementById('ds').value || 0)) +
@@ -161,7 +159,6 @@
 
     inputs.forEach(input => {
       input.addEventListener('input', updateTotal);
-      // при фокусе очищаем placeholder 0
       input.addEventListener('focus', () => {
         if (input.value === "0") input.value = "";
       });
