@@ -170,16 +170,58 @@ input:checked + .slider:before { transform: translateX(24px); }
   align-items:center;
   margin-top:20px;
 }
+
+/* Новый блок обновлений */
+.updates {
+  width: 90%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  backdrop-filter: blur(8px);
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  animation: fadeIn 1s ease;
+  text-align: left;
+}
+.updates h2 {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+.updates ul {
+  list-style: "✨ ";
+  margin: 0;
+  padding-left: 1rem;
+  color: #444;
+  font-size: 0.9rem;
+}
+.updates li {
+  margin-bottom: 0.3rem;
+}
 </style>
 </head>
 <body>
 
+<!-- Меню -->
 <div class="menu" id="menu">
   <h1>📋 МЕНЮ</h1>
   <button id="btnZP">💼 Розрахунок зарплати</button>
   <button id="btnQR">📱 QR-коди комірок</button>
 </div>
 
+<!-- Блок "Що нового" -->
+<div class="updates">
+  <h2>🆕 Що нового (v2.0)</h2>
+  <ul>
+    <li>Додано QR-коди для комірок</li>
+    <li>Покращено дизайн та відображення сум біля кожного поля</li>
+    <li>Пакування рахується автоматично</li>
+  </ul>
+</div>
+
+<!-- Калькулятор -->
 <div class="container hidden" id="calculator">
   <h1>💼 Розрахунок зарплати</h1>
   <label class="toggle-label">
@@ -242,11 +284,12 @@ input:checked + .slider:before { transform: translateX(24px); }
   </div>
 </div>
 
+<!-- QR-коди -->
 <div class="container hidden" id="qrBlock">
   <h1>📱 QR-коди комірок</h1>
   <label>Пошук комірки:</label>
   <div style="display:flex; gap:0.5rem; align-items:center;">
-    <input type="tel" inputmode="numeric" id="searchCell" placeholder="Наприклад: 71-3" style="flex:1;" />
+    <input type="tel" inputmode="numeric" id="searchCell" placeholder="Наприклад: 71" style="flex:1;" />
     <button class="calc-btn" id="clearSearch" style="width:auto; padding:0.5rem 1rem;">🧹</button>
   </div>
   <label>Виберіть комірку:</label>
@@ -257,16 +300,34 @@ input:checked + .slider:before { transform: translateX(24px); }
   </div>
 </div>
 
-<div class="footer">Version 1.6 © 2025 Стоцький В.В.</div>
+<div class="footer">Version 2.0 © 2025 Стоцький В.В.</div>
 
 <script>
 const menu=document.getElementById('menu');
 const calculator=document.getElementById('calculator');
 const qrBlock=document.getElementById('qrBlock');
-document.getElementById('btnZP').onclick=()=>{menu.classList.add('hidden');calculator.classList.remove('hidden');};
-document.getElementById('btnQR').onclick=()=>{menu.classList.add('hidden');qrBlock.classList.remove('hidden');};
-document.getElementById('back').onclick=()=>{calculator.classList.add('hidden');menu.classList.remove('hidden');};
-document.getElementById('backQR').onclick=()=>{qrBlock.classList.add('hidden');menu.classList.remove('hidden');};
+const updates=document.querySelector('.updates');
+
+document.getElementById('btnZP').onclick=()=>{
+  menu.classList.add('hidden');
+  updates.classList.add('hidden');
+  calculator.classList.remove('hidden');
+};
+document.getElementById('btnQR').onclick=()=>{
+  menu.classList.add('hidden');
+  updates.classList.add('hidden');
+  qrBlock.classList.remove('hidden');
+};
+document.getElementById('back').onclick=()=>{
+  calculator.classList.add('hidden');
+  menu.classList.remove('hidden');
+  updates.classList.remove('hidden');
+};
+document.getElementById('backQR').onclick=()=>{
+  qrBlock.classList.add('hidden');
+  menu.classList.remove('hidden');
+  updates.classList.remove('hidden');
+};
 
 const baseRates={ds:1.34,tz:2.69,move:3.32,place:1.53,weight:0.14,pack:0.27};
 const newRates={ds:0.67,tz:1.34,move:1.66,place:0.76,weight:0.07,pack:0.14};
